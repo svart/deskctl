@@ -38,10 +38,16 @@ Two targets: `nested` (a niri started by `deskctl nested start`) and
 
 ## Install
 
-Deskctl runs on Linux with niri. The tested compositor version is niri 26.04.
-To build it, install a Rust toolchain (the release build was checked with Rust
-1.100), a linker, and the libxkbcommon development files. Install `grim` for
-screenshots and ensure your D-Bus session has an AT-SPI bus for accessibility.
+Deskctl runs in a niri session on Linux and links to `libxkbcommon`.
+The tested compositor version is niri 26.04.
+
+| Feature | Additional runtime requirement |
+| --- | --- |
+| Screenshots (`shot`) | `grim` |
+| Accessibility (`a11y`) | An AT-SPI bus in your D-Bus session |
+
+To build from source, install a Rust toolchain (the release build was checked
+with Rust 1.100), a linker, and the libxkbcommon development files.
 
 From the repository root, install the CLI and optionally link the agent skill:
 
@@ -70,9 +76,11 @@ cargo clippy --locked --all-targets -- -D warnings
 cargo fmt --check
 ```
 
-The GUI suite also needs a running niri session, `grim`, an AT-SPI bus, Qt 6
-with Qt Quick Controls, and Python 3 with PyGObject and GTK 4. It uses the Qt
-launcher at `/usr/lib/qt6/bin/qml` and opens nested niri windows.
+### Optional GUI integration tests
+
+The full GUI suite opens nested windows in a running niri session and uses
+`grim` and an AT-SPI bus. Its test apps use Qt 6 with Qt Quick Controls
+(`/usr/lib/qt6/bin/qml`) and Python 3 with PyGObject and GTK 4.
 
 ```sh
 cargo test --locked -- --ignored --test-threads=1
