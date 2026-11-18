@@ -46,27 +46,6 @@ The tested compositor version is niri 26.04.
 | Screenshots (`shot`) | `grim` |
 | Accessibility (`a11y`) | An AT-SPI bus in your D-Bus session |
 
-To build from source, install a Rust toolchain (the release build was checked
-with Rust 1.100), a linker, and the libxkbcommon development files.
-
-From the repository root, install the CLI and optionally link the agent skill:
-
-```sh
-cargo install --locked --path .
-mkdir -p ~/.claude/skills ~/.codex/skills
-ln -s "$PWD/skills/deskctl" ~/.claude/skills/deskctl
-ln -s "$PWD/skills/deskctl" ~/.codex/skills/deskctl
-```
-
-Claude Code permission rules (in `~/.claude/settings.json`): allow
-`Bash(deskctl nested *)` and the read-only session commands (`outputs`,
-`windows`, `workspaces`, `focused`, `layers`, `shot`, `a11y apps|tree|find`);
-`ask` for session `type`, `key`, `click`, `move`, `scroll`, `action`,
-`focus`, `a11y act|set-text|focus`.
-
-The skill (`skills/deskctl/SKILL.md`) teaches Claude Code and Codex how to use
-deskctl and the rules for the real session.
-
 ## Build and test
 
 ```sh
